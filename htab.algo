@@ -1,0 +1,25 @@
+ALGORITHM HTAB_SUM
+VAR
+    set1: ARRAY_OF INTEGER[12, 13, 6, 10]
+    set2: ARRAY_OF INTEGER[13, 10, 16, 15]
+    set: ARRAY_OF INTEGER[8]
+    i,j,SUM_DISTINCT, SUM_COMMUN:INTEGER:=0
+    htab: HASH_TABLE<INTEGER,INTEGER>
+BEGIN
+    set:= concat(set1,set2)
+    FOR i FROM 0 TO set.length-1 STEP step  DO
+        IF(htab.lookup(set[i]= false)) THEN
+         htab.insert(set[i],1)
+         ELSE 
+         htab.insert(set[i], htab.get(set[i]) + 1)
+         END_IF
+    END_FOR
+
+    FOR item in htab  DO
+        IF (item[1]>1) THEN
+          SUM_COMMUN = SUM_COMMUN+ (item[0]*item[1]) 
+          ELSE 
+          SUM_DISTINCT = SUM_DISTINCT + item[0]
+        END_IF
+    END_FOR 
+END
